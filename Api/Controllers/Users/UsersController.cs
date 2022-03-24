@@ -27,12 +27,12 @@ public class UsersController : ControllerBase
             UserName = user.UserName,
             Email = user.Email,
             Phone = user.Phone
-        });
+        }).ToList();
 
-        return Ok(users);
+        return Ok(response);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     public async Task<ActionResult<UserResponse>> GetById(Guid id)
     {
         var user = await _repository.GetByIdAsync(id);

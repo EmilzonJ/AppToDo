@@ -18,4 +18,5 @@ public class UpsertTaskRequest
     public TaskStatus Status { get; set; }
 
     public Guid CategoryId { get; set; }
+    public Guid UserId { get; set; }
 }
