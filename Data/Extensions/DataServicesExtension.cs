@@ -27,6 +27,8 @@ public static class DataServicesExtension
         });
         
         services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ITaskRepository, TaskRepository>();
 
         return services;
     }

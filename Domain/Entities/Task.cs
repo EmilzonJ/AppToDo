@@ -11,5 +11,7 @@ public class Task : EntityBase<Guid>
     public DateTime EndDate { get; set; }
     public TaskStatus Status { get; set; }
     public Guid CategoryId { get; set; }
-    public virtual Category Category { get; set; }
+    public virtual Category Category { get; set; }   
+    public Guid UserId { get; set; }
+    public virtual User User { get; set; }
 }
