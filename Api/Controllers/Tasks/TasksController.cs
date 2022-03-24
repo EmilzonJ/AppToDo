@@ -3,6 +3,7 @@ using Api.Controllers.Tasks.Responses;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Task = Domain.Entities.Task;
+using TaskStatus = Domain.Enums.TaskStatus;
 
 namespace Api.Controllers.Tasks;
 
@@ -16,11 +17,65 @@ public class TasksController : ControllerBase
     {
         _unitOfWork = unitOfWork;
     }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AllTaskResponse>>> GetAll()
+    {
+        var tasks = await _unitOfWork.Tasks.GetAllAsync();
+        
+        var response = tasks.Select(task => new AllTaskResponse
+        {
+            Id = task.Id,
+            Name = task.Description,
+            Description = task.Description,
+            StartDate = task.StartDate,
+            EndDate = task.EndDate,
+            Status = task.Status
+        }).ToList();
+
+        return Ok(response);
+    }
 
     [HttpGet("{userId:guid}")]
-    public async Task<ActionResult<IEnumerable<AllTaskResponse>>> GetAllByUserId(Guid userId)
+    public async Task<ActionResult<IEnumerable<AllTaskResponse>>> GetAllByUser(Guid userId)
     {
         var tasks = await _unitOfWork.Tasks.GetAllByUser(userId);
+
+        var response = tasks.Select(task => new AllTaskResponse
+        {
+            Id = task.Id,
+            Name = task.Description,
+            Description = task.Description,
+            StartDate = task.StartDate,
+            EndDate = task.EndDate,
+            Status = task.Status
+        }).ToList();
+
+        return Ok(response);
+    }
+    
+    [HttpGet("{categoryId:guid}")]
+    public async Task<ActionResult<IEnumerable<AllTaskResponse>>> GetAllByCategory(Guid categoryId)
+    {
+        var tasks = await _unitOfWork.Tasks.GetAllByCategory(categoryId);
+
+        var response = tasks.Select(task => new AllTaskResponse
+        {
+            Id = task.Id,
+            Name = task.Description,
+            Description = task.Description,
+            StartDate = task.StartDate,
+            EndDate = task.EndDate,
+            Status = task.Status
+        }).ToList();
+
+        return Ok(response);
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<AllTaskResponse>>> GetAllByStatus([FromQuery] TaskStatus status)
+    {
+        var tasks = await _unitOfWork.Tasks.GetAllByStatus(status);
 
         var response = tasks.Select(task => new AllTaskResponse
         {
