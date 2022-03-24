@@ -1,4 +1,4 @@
-# WebApi de lista de tareas.
+# WebApi de lista de tareas. (Examen II Unidad Sistemas de Informacion)
 
 # Crear archivo .env en la ruta Api/ 
 Agregar variable de entorno con la cadena de conexión:
