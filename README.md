@@ -1,4 +1,3 @@
-# TODO
 # WebApi de lista de tareas.
 
 # Crear archivo .env en la ruta Api/ 
