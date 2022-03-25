@@ -1,4 +1,5 @@
 ﻿using Data.Extensions;
+using Microsoft.OpenApi.Models;
 
 namespace Api;
 
@@ -20,8 +21,14 @@ public static class Startup
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
-        
+        builder.Services.AddSwaggerGen(options =>
+            options.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Version = "v1",
+                Title = "ToDo API",
+                Description = "An ASP.NET Core Web API for managing ToDo items",
+            }));
+
         // Add Infrastructure Layer Services
         builder.Services.AddDataLayerServices();
     }
